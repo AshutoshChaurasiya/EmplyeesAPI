@@ -17,8 +17,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
-    private final static String BASE_URL = "http://dummy.restapiexample.com/api/v1/";
-    private EditText etempNo;
+    private EditText etSearch;
     private TextView tvData;
     private Button btnSearch;
 
@@ -27,11 +26,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        etempNo = findViewById(R.id.etEmpID);
+        etSearch = findViewById(R.id.etSearch);
         tvData = findViewById(R.id.tvdata);
         btnSearch = findViewById(R.id.btnSearch);
 
-        
     }
 
 
@@ -42,23 +40,23 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     private void loadData() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl("http://dummy.restapiexample.com/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         EmployeeAPI employeeAPI = retrofit.create(EmployeeAPI.class);
 
-        Call<Employee> listCall = employeeAPI.getEmployeeByID(Integer.parseInt(etempNo.getText().toString()));
+        Call<Employee> listCall = employeeAPI.getEmployeeByID(Integer.parseInt(etSearch.getText().toString()));
 
         listCall.enqueue(new Callback<Employee>() {
             @Override
             public void onResponse(Call<Employee> call, Response<Employee> response) {
                 Toast.makeText(SearchActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
                 String content = "";
-                content += " Id : " + response.body().getId() + "\n";
-                content += " Name : " + response.body().getEmployee_name() + "\n";
-                content += " Age : " + response.body().getEmployee_age() + "\n";
-                content += " Salary : " + response.body().getEmployee_salary() + "\n";
+                content += " Id : " +response.body().getId() + "\n";
+                content += " Name : " +response.body().getEmployee_name() + "\n";
+                content += " Age : " +response.body().getEmployee_age() + "\n";
+                content += " Salary : " +response.body().getEmployee_salary() + "\n";
 
                 tvData.setText(content);
             }

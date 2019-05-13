@@ -23,13 +23,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SearchEmployee"
-        android:id="@+id/btSearcheEmp"
+        android:id="@+id/btnSearcheEmp"
         android:layout_margin="20dp"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Update/Delete Employee"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        android:id="@+id/btnUpdateDelete"/>
 
 
 
